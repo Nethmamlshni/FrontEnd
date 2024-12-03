@@ -1,7 +1,7 @@
 import UserData from "../User_Part/userData";
 function Header() {
     return (
-      <div className="bg-[#B17457] w-full h-20 flex justify-between items-center px-6 shadow-md">
+      <div className=" w-full h-20 flex justify-between items-center px-6 shadow-md">
         <h1 className="text-3xl font-bold font-serif text-white tracking-wide">
           Hotel Sara
         </h1>
