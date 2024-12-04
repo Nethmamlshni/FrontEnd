@@ -3,7 +3,7 @@ function HomePage() {
     return (
       <>
         <div className="h-screen w-screen bg-cover bg-center relative"
-      style={{ backgroundImage: `url('/Photoes/li-yang-a8iCZvtrHpQ-unsplash.jpg')`, // Replace with your image URL
+      style={{ backgroundImage: `url('/Photoes/pexels-deeanacreates-2565222.jpg')`, // Replace with your image URL
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',

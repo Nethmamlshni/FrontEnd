@@ -5,6 +5,7 @@ import Test from "./Components/test/test";
 import NotFound from "./pages/Others/notFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login/loginPage";
+import Catagories from "./pages/clientPage/Catagories/catagories" ;
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/catagories" element={<Catagories />} />
         
       </Routes>
     </BrowserRouter>
