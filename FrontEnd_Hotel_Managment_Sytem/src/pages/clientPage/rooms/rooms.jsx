@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export default function Rooms() {
+export default function Rooms() {}
   const [rooms, setRooms] = useState([]); // State to store rooms
   const [loading, setLoading] = useState(true); // Loading state
 
