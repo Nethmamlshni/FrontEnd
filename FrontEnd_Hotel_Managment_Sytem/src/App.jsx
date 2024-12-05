@@ -6,6 +6,7 @@ import NotFound from "./pages/Others/notFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login/loginPage";
 import Catagories from "./pages/clientPage/Catagories/catagories" ;
+import Rooms from "./pages/clientPage/rooms/rooms";
 function App() {
   return (
     <>
@@ -17,7 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/catagories" element={<Catagories />} />
-        
+        <Route path="/rooms" element={<Rooms />} />        
       </Routes>
     </BrowserRouter>
     </>

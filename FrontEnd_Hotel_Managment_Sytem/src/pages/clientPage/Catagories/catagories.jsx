@@ -10,8 +10,7 @@ export default function Categories() {
       .get(import.meta.env.VITE_API_URL + "api/category")
       .then((res) => {
         setCategories(res.data || []); // Safeguard for undefined
-        setLoading(false);
-
+        setLoading(false); // Stop loading
       })
       .catch((err) => {
         console.error("Error fetching categories:", err.message);
