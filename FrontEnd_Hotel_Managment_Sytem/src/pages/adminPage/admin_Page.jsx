@@ -9,7 +9,7 @@ import AdminFeedback from "./feedback/AdminFeedback";
 function AdminPage() {
   return (
     <>
-      <div className="bg-white w-full max-h-[100vh] flex overflow-hidden">
+      <div className="bg-white w-full h-[100vh] flex overflow-scroll ">
         {/* Sidebar */}
         <div className="bg-[#B17457] w-[20%] h-[100vh] flex flex-col items-center px-6 shadow-md">
           {/* Logo Section */}
@@ -20,7 +20,7 @@ function AdminPage() {
           {/* Navigation Links */}
           <nav className="flex flex-col space-y-6 mt-8">
   {/* Booking */}
-  <div className="flex items-center space-x-2">
+  <div className="flex items-center  space-x-2">
     <FaBookmark className="text-white text-lg" />
     <Link to="/admin/Booking" className="text-white text-lg font-serif hover:text-gray-300">
       Booking
@@ -36,7 +36,7 @@ function AdminPage() {
   </div>
 
   {/* Categories */}
-  <div className="flex items-center space-x-2">
+  <div className="flex items-center  space-x-2 ">
     <FaThList className="text-white text-lg" />
     <Link to="/admin/Catagories" className="text-white text-lg font-serif hover:text-gray-300">
       Categories
@@ -61,41 +61,53 @@ function AdminPage() {
 </nav>
 </div>
 {/* Main Content Area */}
-<div className="w-[80%] h-[100vh] flex items-center justify-center bg-[#FAF7F0] overflow-y-scroll">
-          <Routes>
-            <Route
-              path="/Booking"
-              element={
-                <AdminBooking />
-              }
-            />
-            <Route
-              path="/rooms"
-              element={
-                <AdminRooms/>
-              }
-            />
-            <Route
-              path="/Catagories"
-              element={
-                <AdminCategories/>
-              }
-            />
-            <Route
-              path="/Gallery"
-              element={
-                <AdminGallerItem/>
-              }
-            />
-            <Route
-              path="/Feedback"
-              element={
-                <AdminFeedback/>
-              }
-            />
-          </Routes>
+<div className="flex items-start justify-center w-full min-h-screen bg-[#FAF7F0] overflow-y-auto">
+  <div className="w-[90%] lg:w-[100%]  sm:px-6 lg:px-8 bg-white shadow-lg rounded-lg">
+    <Routes>
+      <Route
+        path="/Booking"
+        element={
+          <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+            <AdminBooking />
+          </div>
+        }
+      />
+      <Route
+        path="/rooms"
+        element={
+          <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+            <AdminRooms />
+          </div>
+        }
+      />
+      <Route
+        path="/Catagories"
+        element={
+          <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+            <AdminCategories />
+          </div>
+        }
+      />
+      <Route
+        path="/Gallery"
+        element={
+          <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+            <AdminGallerItem />
+          </div>
+        }
+      />
+      <Route
+        path="/Feedback"
+        element={
+          <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+            <AdminFeedback />
+          </div>
+        }
+      />
+    </Routes>
+  </div>
+</div>
 
-        </div>
       </div>
     </>
   );

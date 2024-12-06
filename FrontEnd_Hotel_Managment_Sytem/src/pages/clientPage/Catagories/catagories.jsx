@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 export default function Categories() {
   const [categories, setCategories] = useState([]); // Default to empty array
   const [loading, setLoading] = useState(true); // Loading state
