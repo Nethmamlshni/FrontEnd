@@ -1,42 +1,4 @@
 
-/*import axios from "axios";
-import { useState , useEffect} from "react";
-
-function UserData(Props) {
-  const [userData, setUserData] = useState(null);
-  const token = localStorage.getItem("token");
-  const [userFound , setUserFound] = useState(false);
-
-      useEffect(() => {
-        if (token) {
-          axios
-            .get(import.meta.env.VITE_API_URL + "api/user", {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            })
-            .then((res) => {
-              setUserData(res.data.user.name);
-      
-            })
-          }}, []
-      );
-  
-    return (
-      <div className="flex absolute right-0  rounded-lg mr-4">
-        <img
-          className="h-16 w-16 rounded-full border-2 border-[#fbfaf9]"
-          src={Props.img}
-          alt="User Profile"
-        />
-        <h1 className="ml-4 text-lg font-semibold text-[#f8f7f6]">{Props.name}</h1>
-          <button onClick={() => {localStorage.removeItem("token") ,setUserFound(false);
-           }} className=" text-white px-1 py-2 rounded-lg shadow hover:bg-[#0a0a0a] transition duration-300">Logout</button>
-      </div>
-    );
-  }
-  
-  export default UserData;*/
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 

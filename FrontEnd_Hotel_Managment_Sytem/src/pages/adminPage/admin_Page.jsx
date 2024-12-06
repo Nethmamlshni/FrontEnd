@@ -4,7 +4,7 @@ import AdminBooking from "./Booking/adminBooking";
 import AdminRooms from "./Rooms/adminRooms";
 import AdminCategories from "./catagories/adminCatagorie";
 import AdminGallerItem from "./gallerItem/AdmingallerItem";
-import AdminFeedback from "./feedback/AdminFeedback";
+import AdminFeedbackPage from "./feedback/adminFeedback";
 
 function AdminPage() {
   return (
@@ -100,7 +100,7 @@ function AdminPage() {
         path="/Feedback"
         element={
           <div className="p-6 bg-gray-50 rounded-lg shadow-md">
-            <AdminFeedback />
+            <AdminFeedbackPage />
           </div>
         }
       />
