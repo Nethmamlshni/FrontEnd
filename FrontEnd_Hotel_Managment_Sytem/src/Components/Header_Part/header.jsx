@@ -11,7 +11,7 @@ function Header() {
   };
 
   return (
-    <div className="w-full h-20 flex justify-between items-center px-6 shadow-md bg-gray-800">
+    <div className="font-playfair w-full h-20 flex justify-between items-center px-6 shadow-md bg-gray-800">
       <h1 className="text-3xl font-bold font-serif text-white tracking-wide">
         Hotel Sara
       </h1>
