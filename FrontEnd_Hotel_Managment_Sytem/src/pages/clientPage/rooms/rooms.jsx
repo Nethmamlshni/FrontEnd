@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import Header from "../../../Components/Header_Part/header";
 export default function Rooms() {
   const [rooms, setRooms] = useState([]); // State to store rooms
   const [loading, setLoading] = useState(true); // Loading state
@@ -32,6 +32,8 @@ export default function Rooms() {
 
   // Render room cards
   return (
+    <>
+    <Header/>
     <div className="flex flex-col items-center min-h-screen bg-gray-50 py-12 px-6">
       <h1 className="text-4xl font-bold text-[#4A4947] mb-8">Hotel Rooms</h1>
 
@@ -66,5 +68,6 @@ export default function Rooms() {
         ))}
       </div>
     </div>
+    </>
   );
 }

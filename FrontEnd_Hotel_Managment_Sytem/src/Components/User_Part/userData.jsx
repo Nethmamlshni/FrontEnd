@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 function UserData() {
   const [userData, setUserData] = useState(null); // Stores user data
   const [userFound, setUserFound] = useState(false); // Tracks if user is found
@@ -36,36 +35,38 @@ function UserData() {
     return <p className="text-white">Loading...</p>; // Show a loading message
   }
 
-  if (!userFound) {
-    return <p className="text-white">User</p>;
-  }
+ 
+    if (!userFound) {
+      return (
+        <div className="flex flex-col items-center">
+          <img
+            src="/Photoes/download.png" // Replace with the actual path to your default profile picture
+            alt="Default Profile"
+            className="w-20 h-20 rounded-full border-2 border-white cursor-pointer " // Example styling for a circular image
+            onClick={() => {
+              window.location.href = "/login"; // Redirect to login page
+            }}
+          />
+          </div>
+      );
+    }
+    
+
 
   return (
     <div className="flex items-center space-x-4">
       <img
-        className="text-lg font-semibold text-white h-16 w-16 rounded-full border-2 border-white"
+        className=" h-16 w-16 rounded-full  cursor-pointer"
         src={
           userFound && userData?.img
             ? userData.img
-            : "FrontEnd_Hotel_Managment_Sytem/Photoes/download.png" // Show default profile photo if user not found
+            : "/Photoes/download.png" // Show default profile photo if user not found
         }
         alt="User Profile"
+        onClick={() => {
+          window.location.href = "/UserDetails "; // Redirect to login page
+        }}
       />
-      <h1 className="text-lg font-semibold text-white">
-        {userFound && userData?.name ? userData.name : "User"} {/* Show "User" if not found */}
-      </h1>
-      {userFound && (
-        <button
-          onClick={() => {
-            localStorage.removeItem("token");
-            setUserData(null);
-            setUserFound(false);
-          }}
-          className="ml-4 text-white px-3 py-2 rounded-lg shadow hover:bg-black transition duration-300"
-        >
-          Logout
-        </button>
-      )}
     </div>
   );
 }

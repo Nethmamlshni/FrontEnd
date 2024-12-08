@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ClientFeedbackPage from "./appoveFeedback";
+import Header from "../../../Components/Header_Part/header";
 
 const ClientFeedbackPages = () => {
     const [feedback, setFeedback] = useState("");
@@ -21,6 +22,8 @@ const ClientFeedbackPages = () => {
     };
 
     return (
+        <>
+        <Header/>
         <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
             <h1 className="text-2xl font-bold text-gray-800 mb-6">Submit Your Feedback</h1>
             <form
@@ -54,6 +57,7 @@ const ClientFeedbackPages = () => {
                 <ClientFeedbackPage />
             </div>
         </div>
+        </>
     );
 };
 

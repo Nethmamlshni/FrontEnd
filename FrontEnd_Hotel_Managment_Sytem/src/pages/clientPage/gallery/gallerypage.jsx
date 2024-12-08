@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "../../../Components/Header_Part/header";
 
 export default function GalleryPage() {
   const [galleryItems, setGalleryItems] = useState([]); // State to hold gallery items
@@ -32,6 +33,8 @@ export default function GalleryPage() {
 
   // Main render for gallery
   return (
+    <>
+    <Header/>
     <div className="flex flex-col items-center min-h-screen bg-gray-50 py-12 px-6">
       <h1 className="text-4xl font-bold text-[#4A4947] mb-8">Gallery</h1>
 
@@ -55,5 +58,6 @@ export default function GalleryPage() {
         ))}
       </div>
     </div>
+    </>
   );
 }

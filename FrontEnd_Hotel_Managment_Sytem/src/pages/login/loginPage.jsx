@@ -1,8 +1,10 @@
 
 import { useState } from "react";
 import axios from "axios";
+import Header from "../../Components/Header_Part/header";
 
 function LoginPage() {
+ 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +35,8 @@ function LoginPage() {
   };
 
   return (
+    <>
+    <Header/>
     <div
       className="h-screen w-screen bg-cover bg-center relative"
       style={{
@@ -68,6 +72,7 @@ function LoginPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

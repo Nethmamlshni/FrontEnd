@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "../../../Components/Header_Part/header";
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState([]);
@@ -115,6 +116,8 @@ export default function AdminCategories() {
   }
 
   return (
+    <>
+    <Header/>
     <div className="max-w-7xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Room Categories</h1>
 
@@ -216,5 +219,6 @@ export default function AdminCategories() {
         ))}
       </div>
     </div>
+    </>
   );
 }
