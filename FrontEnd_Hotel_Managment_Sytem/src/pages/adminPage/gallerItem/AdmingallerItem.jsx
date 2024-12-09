@@ -24,7 +24,7 @@ export default function GalleryPage() {
     axios
       .get(import.meta.env.VITE_API_URL + "api/gallery")
       .then((res) => {
-        setGalleryItems(res.data.galleryItems);
+        setGalleryItems(res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -113,6 +113,9 @@ export default function GalleryPage() {
 
   if (loading) {
     return <div>Loading gallery items...</div>;
+  }
+  if (!Array.isArray(galleryItems)) {
+    return <div>Error loading gallery items. Please try again.</div>;
   }
 
   return (

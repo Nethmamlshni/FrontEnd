@@ -53,7 +53,6 @@ const ClientFeedbackPages = () => {
                 </button>
             </form>
             <div className="mt-10 w-full max-w-4xl">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Approved Feedback</h2>
                 <ClientFeedbackPage />
             </div>
         </div>

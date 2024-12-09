@@ -13,7 +13,7 @@ const AdminFeedbackPage = () => {
                 },
             })
             .then((res) => {
-                setFeedbacks(res.data);
+                setFeedbacks(res.data); // Load all feedbacks (approved and unapproved)
             })
             .catch((err) => {
                 console.error("Error fetching feedbacks:", err);
@@ -25,11 +25,13 @@ const AdminFeedbackPage = () => {
             .put(`${import.meta.env.VITE_API_URL}api/feedback/${id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-                }, 
+                },
             })
             .then(() => {
                 alert("Feedback approved!");
-                setFeedbacks(feedbacks.filter((feedback) => feedback._id !== id)); // Remove from the list
+                setFeedbacks(feedbacks.map((feedback) =>
+                    feedback._id === id ? { ...feedback, approved: true } : feedback
+                ));
             })
             .catch((err) => {
                 console.error("Error approving feedback:", err);
@@ -38,7 +40,7 @@ const AdminFeedbackPage = () => {
 
     return (
         <>
-        <Header/>
+        <Header />
         <div className="min-h-screen bg-gray-50 py-10 px-6">
             <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Admin - Feedback Management</h1>
             {feedbacks.length === 0 ? (
@@ -57,7 +59,7 @@ const AdminFeedbackPage = () => {
                                     <p className="text-green-600 font-semibold">Status: Approved</p>
                                 ) : (
                                     <button
-                                        onClick={() => approveFeedback(feedback._id)} 
+                                        onClick={() => approveFeedback(feedback._id)}
                                         className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
                                     >
                                         Approve Feedback
@@ -74,4 +76,3 @@ const AdminFeedbackPage = () => {
 };
 
 export default AdminFeedbackPage;
-

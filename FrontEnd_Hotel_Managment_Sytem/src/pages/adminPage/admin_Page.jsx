@@ -4,7 +4,8 @@ import AdminBooking from "./Booking/adminBooking";
 import AdminRooms from "./Rooms/adminRooms";
 import AdminCategories from "./catagories/adminCatagorie";
 import AdminGallerItem from "./gallerItem/AdmingallerItem";
-import AdminFeedbackPage from "./feedback/adminFeedback";
+import AdminFeedbackPage from "./feedback/AdminFeedback";
+import Header from "../../Components/Header_Part/header";
 
 function AdminPage() {
   return (
