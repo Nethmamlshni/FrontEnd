@@ -12,7 +12,7 @@ function AdminBooking() {
 
   return (
     <>
-    <Header/>
+  
     <div className="flex flex-col items-center h-full w-full px-6">
       <h1 className="text-4xl font-bold text-[#4A4947] mb-8">
         Booking Details

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Header from "../../Components/Header_Part/header";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
  
@@ -20,7 +21,8 @@ function LoginPage() {
         localStorage.setItem("token", res.data.token); // Store token
         const token = localStorage.getItem("token");
 
-        if (res.data.user.type == "admin") {
+        if (res.data.user.type !== "admin") {
+          console.log(res.data.user.type);
             window.location.href = "/";
            // Redirect to admin page
         } else {
@@ -63,6 +65,9 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             className="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full bg-white/80"
           />
+          <Link to="/forgot-password" className="text-white hover:text-white-500">
+    Forgot your password?
+  </Link>
           <button
             className="bg-[#B17457] text-white px-6 py-3 rounded-lg w-full hover:bg-[#9a5f42] transition duration-300"
             onClick={handleLogin}

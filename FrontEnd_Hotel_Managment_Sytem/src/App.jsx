@@ -9,6 +9,9 @@ import GalleryPage from "./pages/clientPage/gallery/gallerypage";
 import ClientFeedbackPages from "./pages/clientPage/feedback/feedbackPage";
 import ClientFeedbackPage from "./pages/clientPage/feedback/appoveFeedback";
 import UserDetailsLog from "./pages/clientPage/userDetails/userDetailsLog";
+import Register from "./pages/Register/register";
+import ForgotPassword from "./pages/login/forgotPass";
+import ResetPassword from "./pages/login/reset";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path="/feedback" element={<ClientFeedbackPages />} />
         <Route path="/feedback/:id" element={<ClientFeedbackPage />} />
         <Route path="/userDetails" element={<UserDetailsLog />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
        
       </Routes>
     </BrowserRouter>

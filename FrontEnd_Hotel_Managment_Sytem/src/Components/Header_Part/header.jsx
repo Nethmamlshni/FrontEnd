@@ -38,6 +38,12 @@ function Header() {
         <Link to="/login" className="hover:text-[#A35D3B] transition-all">
           Login
         </Link>
+        <Link to="/admin" className="hover:text-[#A35D3B] transition-all">
+          Admin
+        </Link>
+        <Link to ="/register" className="hover:text-[#A35D3B] transition-all">
+          Register
+        </Link>
       </nav>
 
       {/* Mobile Navigation Toggle Icon */}
@@ -101,6 +107,20 @@ function Header() {
             className="hover:text-[#A35D3B] transition-all"
           >
             Login
+          </Link>
+          <Link
+            to="/admin"
+            onClick={toggleMenu}
+            className="hover:text-[#A35D3B] transition-all"
+          >
+            Admin
+          </Link>
+          <Link
+            to="/register"
+            onClick={toggleMenu}
+            className="hover:text-[#A35D3B] transition-all"
+          >
+            Register
           </Link>
         </div>
       )}
