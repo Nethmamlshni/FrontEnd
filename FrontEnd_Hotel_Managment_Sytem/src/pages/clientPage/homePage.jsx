@@ -58,7 +58,7 @@ function HomePage() {
     <>
       {/* Booking Section */}
       <div
-        className="h-screen w-screen bg-cover bg-center relative"
+        className="h-screen w-screen bg-cover bg-center relative bg-slate-500"
         style={{
           backgroundImage: `url('/Photoes/pexels-deeanacreates-2565222.jpg')`,
           backgroundSize: "cover",
