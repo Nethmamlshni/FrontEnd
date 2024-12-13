@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import Header from "../../Components/Header_Part/header";
 
 function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -32,6 +33,8 @@ function ResetPassword() {
   };
 
   return (
+    <>
+    <Header/>
     <div>
       <h2>Reset Password</h2>
       <form onSubmit={handleSubmit}>
@@ -54,6 +57,7 @@ function ResetPassword() {
       {message && <p>{message}</p>}
       {error && <p>{error}</p>}
     </div>
+    </>
   );
 }
 

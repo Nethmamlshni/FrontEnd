@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Header from "../../Components/Header_Part/header";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -20,6 +21,8 @@ function ForgotPassword() {
   
 
   return (
+    <>
+    <Header/>
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-md w-full space-y-6">
         <h2 className="text-center text-2xl font-bold">Forgot Password</h2>
@@ -48,6 +51,7 @@ function ForgotPassword() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

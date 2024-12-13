@@ -12,6 +12,7 @@ export default function AdminRooms() {
     isAvailable: "available",
     features:  [],
     description:"",
+    image: "",
   });
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -81,6 +82,7 @@ export default function AdminRooms() {
       isAvailable: "available",
       features:  [],
       description:"",
+      image: "",
     });
     setIsEditMode(false);
   };
@@ -172,6 +174,14 @@ export default function AdminRooms() {
           required
           className="w-full mb-4 p-2 border rounded"
         />
+        <input
+          type="text"
+          placeholder="Image URL"
+          value={form.image}
+          onChange={(e) => setForm({ ...form, image: e.target.value })}
+          required
+          className="w-full mb-4 p-2 border rounded"
+        />
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
           {isEditMode ? "Update Room" : "Add Room"}
         </button>
@@ -186,6 +196,7 @@ export default function AdminRooms() {
             <p className="font-semibold text-gray-700">Price: ${room.price}</p>
             <p className="font-semibold text-gray-700">Availability: {room.isAvailable}</p>
             <p>Features: {room.features.join(", ")}</p>
+            <p className=" ">Images: {room.image}</p>
             <button
               onClick={() => handleEdit(room)}
               className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded"

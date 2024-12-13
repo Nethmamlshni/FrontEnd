@@ -60,7 +60,7 @@ function HomePage() {
       <div
         className="h-screen w-screen bg-cover bg-center relative bg-slate-500"
         style={{
-          
+          backgroundImage: "url('https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
