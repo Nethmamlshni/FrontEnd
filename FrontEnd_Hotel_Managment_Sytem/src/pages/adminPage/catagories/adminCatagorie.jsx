@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "../../../Components/Header_Part/header";
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState([]);
@@ -11,9 +10,10 @@ export default function AdminCategories() {
     description: "",
     status: "available",
     price: "",
-    feacuters: [],
+    feacuters: "",
   });
-  const [isEditMode, setIsEditMode] = useState(false); // Track if editing
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false); // Modal visibility state
 
   useEffect(() => {
     fetchCategories();
@@ -40,39 +40,28 @@ export default function AdminCategories() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isEditMode) {
-      // Update Category
-      axios
-        .put(
+    const request = isEditMode
+      ? axios.put(
           `${import.meta.env.VITE_API_URL}api/category/${encodeURIComponent(form.name)}`,
           form,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+          { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
         )
-        .then(() => {
-          alert("Category updated successfully!");
-          fetchCategories();
-          resetForm();
-        })
-        .catch((err) => console.error("Error updating category:", err));
-    } else {
-      // Add Category
-      axios
-        .post(`${import.meta.env.VITE_API_URL}api/category`, form, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(() => {
-          alert("Category added successfully!");
-          fetchCategories();
-          resetForm();
-        })
-        .catch((err) => console.error("Error adding category:", err));
-    }
+      : axios.post(`${import.meta.env.VITE_API_URL}api/category`, form, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+
+    request
+      .then(() => {
+        alert(isEditMode ? "Category updated successfully!" : "Category added successfully!");
+        fetchCategories();
+        resetForm();
+      })
+      .catch((err) => {
+        console.error(
+          isEditMode ? "Error updating category:" : "Error adding category:",
+          err
+        );
+      });
   };
 
   const resetForm = () => {
@@ -82,23 +71,23 @@ export default function AdminCategories() {
       description: "",
       status: "available",
       price: "",
-      feacuters: [],
+      feacuters: "",
     });
     setIsEditMode(false);
+    setModalVisible(false); // Hide modal on reset
   };
 
   const handleEdit = (category) => {
     setForm(category);
-    setIsEditMode(true); // Switch to edit mode
+    setIsEditMode(true);
+    setModalVisible(true); // Open modal for edit
   };
 
   const handleDelete = (name) => {
     if (window.confirm(`Are you sure you want to delete the category '${name}'?`)) {
       axios
         .delete(`${import.meta.env.VITE_API_URL}api/category/${name}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then(() => {
           alert("Category deleted successfully!");
@@ -116,82 +105,108 @@ export default function AdminCategories() {
   }
 
   return (
-    <>
-    
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Room Categories</h1>
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Categories</h1>
 
-      {/* Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mb-8"
+      {/* Toggle Modal Button */}
+      <button
+        onClick={() => setModalVisible(true)}
+        className="mb-6 px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded"
       >
-        <h2 className="text-2xl font-semibold mb-4">
-          {isEditMode ? "Edit Category" : "Add Category"}
-        </h2>
-        <input
-          type="text"
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-          className="w-full mb-4 p-2 border rounded"
-          disabled={isEditMode} // Disable editing the name in update mode
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={form.image}
-          onChange={(e) => setForm({ ...form, image: e.target.value })}
-          required
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <textarea
-          placeholder="Description"
-          value={form.description}
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
-          required
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <input
-          type="text"
-          placeholder="Features (comma-separated)"
-          value={form.feacuters.join(",")}
-          onChange={(e) => setForm({ ...form, feacuters: e.target.value.split(",") })}
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <select
-          value={form.status}
-          onChange={(e) => setForm({ ...form, status: e.target.value })}
-          required
-          className="w-full mb-4 p-2 border rounded"
-        >
-          <option value="available">Available</option>
-          <option value="unavailable">Unavailable</option>
-        </select>
-        <input
-          type="number"
-          placeholder="Price"
-          value={form.price}
-          onChange={(e) => setForm({ ...form, price: e.target.value })}
-          required
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded">
-          {isEditMode ? "Update Category" : "Add Category"}
-        </button>
-        {isEditMode && (
-          <button
-            type="button"
-            onClick={resetForm}
-            className="w-full bg-gray-500 text-white py-2 px-4 rounded mt-4"
-          >
-            Cancel
-          </button>
-        )}
-      </form>
+        Add Category
+      </button>
 
-      {/* Categories */}
+      {/* Modal */}
+      {modalVisible && (
+        <div
+          className="fixed top-0 right-0 left-0 z-50 w-full h-full flex justify-center items-center bg-gray-900 bg-opacity-50"
+          aria-hidden="true"
+        >
+          <div className="relative p-6 bg-white rounded-lg shadow-md w-full max-w-md">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold">
+                {isEditMode ? "Edit Category" : "Add Category"}
+              </h3>
+              <button
+                onClick={() => resetForm()}
+                className="text-gray-500 hover:bg-gray-200 p-2 rounded"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Modal Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                placeholder="Name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                required
+                className="w-full p-2 border rounded"
+                disabled={isEditMode} // Disable editing name in edit mode
+              />
+              <input
+                type="text"
+                placeholder="Image URL"
+                value={form.image}
+                onChange={(e) => setForm({ ...form, image: e.target.value })}
+                required
+                className="w-full p-2 border rounded"
+              />
+              <textarea
+                placeholder="Description"
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                required
+                className="w-full p-2 border rounded"
+              />
+              <input
+                type="text"
+                placeholder="Features"
+                value={form.feacuters}
+                onChange={(e) => setForm({ ...form, feacuters: e.target.value })}
+                className="w-full p-2 border rounded"
+              />
+              <select
+                value={form.status}
+                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                required
+                className="w-full p-2 border rounded"
+              >
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+              </select>
+              <input
+                type="number"
+                placeholder="Price"
+                value={form.price}
+                onChange={(e) => setForm({ ...form, price: e.target.value })}
+                required
+                className="w-full p-2 border rounded"
+              />
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded"
+              >
+                {isEditMode ? "Update Category" : "Add Category"}
+              </button>
+              {isEditMode && (
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="w-full bg-gray-500 text-white py-2 px-4 rounded mt-4"
+                >
+                  Cancel
+                </button>
+              )}
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Categories List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((category) => (
           <div key={category.name} className="p-4 bg-gray-100 rounded shadow">
@@ -202,7 +217,10 @@ export default function AdminCategories() {
             />
             <h3 className="font-bold text-lg">{category.name}</h3>
             <p className="text-sm text-gray-600 mb-2">{category.description}</p>
-            <p className="text-lg font-semibold mb-4">Price: ${category.price}</p>
+            <p className="text-sm text-gray-600 mb-2">
+              Features: {category.feacuters}
+            </p>
+            <p className="text-lg font-semibold mb-4">Price: {category.price}</p>
             <button
               onClick={() => handleEdit(category)}
               className="bg-yellow-500 text-white py-1 px-2 rounded mr-2"
@@ -219,6 +237,5 @@ export default function AdminCategories() {
         ))}
       </div>
     </div>
-    </>
   );
 }

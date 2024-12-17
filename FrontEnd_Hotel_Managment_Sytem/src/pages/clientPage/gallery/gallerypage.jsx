@@ -11,7 +11,7 @@ export default function GalleryPage() {
     axios
       .get(import.meta.env.VITE_API_URL + "api/gallery")
       .then((res) => {
-        setGalleryItems(res.data.galleryItems || []); // Safeguard for undefined
+        setGalleryItems(res.data || []); // Safeguard for undefined
         setLoading(false); // Stop loading
       })
       .catch((err) => {

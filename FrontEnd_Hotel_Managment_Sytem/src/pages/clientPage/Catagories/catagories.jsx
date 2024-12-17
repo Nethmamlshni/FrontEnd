@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../../../Components/Header_Part/header";
+import CatagoryDetails from "./catagoryDetails";
 export default function Categories() {
   const [categories, setCategories] = useState([]); // Default to empty array
   const [loading, setLoading] = useState(true); // Loading state
@@ -18,7 +19,6 @@ export default function Categories() {
         setLoading(false); // Stop loading even on error
       });
   }, []);
-
   if (loading) {
     return <div>Loading categories...</div>;
   }
@@ -31,9 +31,9 @@ export default function Categories() {
     <>
     <Header/>
     <div className="flex flex-col items-center min-h-screen bg-gray-50 py-12 px-6">
-      <h1 className="text-4xl font-bold text-[#4A4947] mb-8">Room Categories</h1>
+      <h1 className="text-4xl font-bold text-[#4A4947] mb-8">Categories</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full" >
         {categories.map((category, index) => (
           <div
             key={index}
@@ -42,13 +42,19 @@ export default function Categories() {
             <img
               src={category.image}
               alt={category.name}
-              className="h-56 w-full object-cover rounded-t-lg"
+              className="h-56 w-full object-cover rounded-t-lg cursor-pointer"
             />
             <div className="p-6">
               <h2 className="text-2xl font-semibold text-[#4A4947] mb-2">{category.name}</h2>
               <p className="text-gray-600 mb-4">{category.description}</p>
               <div className="flex justify-between items-center">
-                <p className="font-bold text-lg text-[#4A4947]">Price: ${category.price}</p>
+              <p>
+             <button 
+                 className="bg-[#4A4947] text-white px-3 py-1 text-sm rounded-full hover:bg-gray-600"
+                 onClick={() => window.location.href = `/catagories/${category.name}`}>
+                  Details
+              </button>
+                </p>
                 <span
                   className={`px-3 py-1 text-sm rounded-full ${
                     category.status === "available"

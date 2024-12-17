@@ -12,6 +12,7 @@ import UserDetailsLog from "./pages/clientPage/userDetails/userDetailsLog";
 import Register from "./pages/Register/register";
 import ForgotPassword from "./pages/login/forgotPass";
 import ResetPassword from "./pages/login/reset";
+import CatagoryDetails from "./pages/clientPage/Catagories/catagoryDetails";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/catagories/:id" element={<CatagoryDetails />} />
        
       </Routes>
     </BrowserRouter>
