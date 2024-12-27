@@ -84,7 +84,7 @@ function HomePage() {
      
     <Header className="backdrop-blur-md absolute top-0 left-0 right-0"/>
         <div className="backdrop-blur-md h-auto p-8 m-20 rounded-3xl flex flex-col items-center space-y-6 shadow-lg">
-          <h2 className="text-[#fdfdfc] text-2xl font-bold">B O O K N O W !</h2>
+          <h2 className="text-[#fdfdfc] text-2xl font-bold">B O O K  N O W !</h2>
           <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
             <input
               type="date"

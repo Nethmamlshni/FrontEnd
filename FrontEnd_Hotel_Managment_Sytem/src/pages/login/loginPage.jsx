@@ -42,7 +42,7 @@ function LoginPage() {
     <div
       className="h-screen w-screen bg-cover bg-center relative"
       style={{
-        backgroundImage: `url('/Photoes/li-yang-a8iCZvtrHpQ-unsplash.jpg')`, // Replace with your image URL
+        backgroundImage: `url('https://www.bestoflanka.com/images/slider/recommended-stays-sri-lanka/stay-on-the-beach-sri-lanka/01.jpg')`, // Replace with your image URL
       }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-50"></div> {/* Dark overlay */}
