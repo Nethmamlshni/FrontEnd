@@ -30,12 +30,12 @@ function AdminPage() {
           {/* Hamburger Menu for Mobile */}
           <div className="sm:hidden">
             {isMenuOpen ? (
-              <FaTimes 
+              <FaTimes
                 className="text-white text-2xl cursor-pointer"
                 onClick={toggleMenu}
               />
             ) : (
-              <FaBars 
+              <FaBars
                 className="text-white text-2xl cursor-pointer"
                 onClick={toggleMenu}
               />
@@ -113,15 +113,15 @@ const NavLinks = ({ onClick }) => {
         className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
         onClick={onClick}
       >
-        <FaBookmark />
+        <FaBookmark className="text-xl" />
         <span>Home</span>
       </Link>
       <Link
         to="/admin/Booking"
-        className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
+       className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
         onClick={onClick}
       >
-        <FaBookmark />
+        <FaBookmark className="text-xl" />
         <span>Booking</span>
       </Link>
       <Link
@@ -129,7 +129,7 @@ const NavLinks = ({ onClick }) => {
         className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
         onClick={onClick}
       >
-        <FaBed />
+        <FaBed className="text-xl" />
         <span>Rooms</span>
       </Link>
       <Link
@@ -137,7 +137,7 @@ const NavLinks = ({ onClick }) => {
         className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
         onClick={onClick}
       >
-        <FaThList />
+        <FaThList className="text-xl" />
         <span>Categories</span>
       </Link>
       <Link
@@ -145,7 +145,7 @@ const NavLinks = ({ onClick }) => {
         className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
         onClick={onClick}
       >
-        <FaImage />
+        <FaImage className="text-xl" />
         <span>Gallery</span>
       </Link>
       <Link
@@ -153,7 +153,7 @@ const NavLinks = ({ onClick }) => {
         className="text-white text-lg font-serif hover:text-gray-300 flex items-center space-x-1"
         onClick={onClick}
       >
-        <FaCommentAlt />
+        <FaCommentAlt className="text-xl" />
         <span>Feedback</span>
       </Link>
     </>

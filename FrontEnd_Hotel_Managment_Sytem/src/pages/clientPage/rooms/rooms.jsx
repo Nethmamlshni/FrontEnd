@@ -13,7 +13,6 @@ export default function Rooms() {
       .then((res) => {
         setRooms(res.data || []); // Safeguard for undefined
         setLoading(false); // Stop loading
-        console.log(res.data);
       })
       .catch((err) => {
         console.error("Error fetching rooms:", err.message);
@@ -21,6 +20,7 @@ export default function Rooms() {
         setLoading(false); // Stop loading even on error
       });
   }, []);
+
 
   // Loading state
   if (loading) {
@@ -59,13 +59,25 @@ export default function Rooms() {
                   Room {room.roomNumber} ({room.type})
                 </h2>
                 <p className="text-gray-600 mb-4">{room.description}</p>
+                <p className="text-gray-600"> {room.category}</p>
                 <ul className="text-gray-700 mb-4">
                   {room.features.map((feature, idx) => (
-                    <li key={idx}>- {feature}</li>
+                    <li key={idx}>{feature}</li>
                   ))}
                 </ul>
+                <div>
+                <p className="font-bold text-lg text-[#4A4947]">Price: ${room.price}</p>
+                  <p><img src={room.image} alt={room.type} className="h-20 w-full object-cover mt-2" /></p>
+                </div>
                 <div className="flex justify-between items-center">
-                  <p className="font-bold text-lg text-[#4A4947]">Price: ${room.price}</p>
+                <button
+                 className="bg-[#4A4947] hover:bg-[#4A4947] text-white py-2 px-4 rounded-md mt-4"
+                 onClick={() => {
+                 const roomNumber = room.roomNumber; // Replace with your dynamic room number
+                window.location.href = `http://localhost:5173/?roomNumber=${roomNumber}`;
+                 }}>
+                  Book Now
+                   </button>
                   <span
                     className={`px-3 py-1 text-sm rounded-full ${
                       room.isAvailable
@@ -75,17 +87,6 @@ export default function Rooms() {
                   >
                     {room.isAvailable ? "Available" : "Unavailable"}
                   </span>
-                </div>
-                <div>
-                  <button
-                    className="bg-[#4A4947] hover:bg-[#4A4947] text-white py-2 px-4 rounded-md mt-4"
-                    onClick={() => {
-                      // Handle booking logic here
-                      console.log(`Booking room ${room.roomNumber}`);
-                    }}
-                  >
-                    Book Now
-                  </button>
                 </div>
               </div>
             </div>

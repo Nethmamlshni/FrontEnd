@@ -40,7 +40,7 @@ function UserData() {
       return (
         <div className="flex flex-col items-center">
           <img
-            src="/Photoes/download.png" // Replace with the actual path to your default profile picture
+            src="/Photoes/—Pngtree—light gray silhouette avatar_6404676.png" // Replace with the actual path to your default profile picture
             alt="Default Profile"
             className="w-20 h-20 rounded-full border-2 border-white cursor-pointer " // Example styling for a circular image
             onClick={() => {
@@ -60,7 +60,7 @@ function UserData() {
         src={
           userFound && userData?.img
             ? userData.img
-            : "/Photoes/download.png" // Show default profile photo if user not found
+            : "/Photoes/—Pngtree—light gray silhouette avatar_6404676.png" // Show default profile photo if user not found
         }
         alt="User Profile"
         onClick={() => {

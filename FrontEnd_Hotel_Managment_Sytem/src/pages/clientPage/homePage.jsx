@@ -1,5 +1,5 @@
 import Header from "../../Components/Header_Part/header";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link,BrowserRouter, Routes, Route } from "react-router-dom";
 import Catagories from "./Catagories/catagories";
 import Rooms from "./rooms/rooms";
@@ -15,11 +15,24 @@ function HomePage() {
       <Route path="/feedback" element={<FeedbackPages />} />    
     </Routes>
   </BrowserRouter>
+  const [roomNumbers, setRoomNumber] = useState("");
+
+  useEffect(() => {
+    // Get the query parameter from the URL
+    const params = new URLSearchParams(window.location.search);
+    const room = params.get("roomNumber");
+    if (room) {
+      setRoomNumber(room);
+
+    }
+  }, []);
+
 
   const [booking, setBooking] = useState({
     checkInDate: "",
     checkOutDate: "",
     roomType: "luxury",
+    roomNumber:"",
     notes: "",
   });
 
@@ -37,10 +50,10 @@ function HomePage() {
     }
 
     const newBooking = {
-      roomNumber: `B00${Math.floor(Math.random() * 100)}`,
+      roomNumber: booking.roomNumber||roomNumbers,
       checkInDate: booking.checkInDate,
       checkOutDate: booking.checkOutDate,
-      totalPrice: Math.floor(Math.random() * 1000) + 100,
+      totalPrice: booking.roomType === "luxury" ? 500 : booking.roomType === "deluxe" ? 300 : 100,
       status: "Pending",
       createdAt: new Date().toISOString(),
       notes: booking.notes || "N/A",
@@ -50,7 +63,7 @@ function HomePage() {
     bookings.push(newBooking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    setBooking({ checkInDate: "", checkOutDate: "", roomType: "luxury", notes: "" });
+    setBooking({ checkInDate: "", checkOutDate: "", roomType: "luxury",roomNumber:"", notes: "" });
     alert("Booking added successfully!");
   };
 
@@ -60,7 +73,7 @@ function HomePage() {
       <div
         className="h-screen w-screen bg-cover bg-center relative bg-slate-500"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+          backgroundImage: "url('https://cdn.prod.website-files.com/66f278307a717e3092522530/67206d03310cb0bd1be82de9_67206b280b7b2b4223a3e0b3_Cabana_C.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -71,7 +84,7 @@ function HomePage() {
      
     <Header className="backdrop-blur-md absolute top-0 left-0 right-0"/>
         <div className="backdrop-blur-md h-auto p-8 m-20 rounded-3xl flex flex-col items-center space-y-6 shadow-lg">
-          <h2 className="text-[#141413] text-2xl font-bold">B O O K N O W !</h2>
+          <h2 className="text-[#fdfdfc] text-2xl font-bold">B O O K N O W !</h2>
           <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
             <input
               type="date"
@@ -97,6 +110,14 @@ function HomePage() {
               <option value="deluxe">Deluxe</option>
               <option value="simple">Simple</option>
             </select>
+            <input
+              type="text"
+              name="roomNumber"
+              value={roomNumbers||booking.roomNumber}
+              placeholder="Room Number"
+              onChange={handleChange}
+              className="px-4 py-2 rounded-lg border border-[#151514] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
+            />
             <input
               type="text"
               name="notes"

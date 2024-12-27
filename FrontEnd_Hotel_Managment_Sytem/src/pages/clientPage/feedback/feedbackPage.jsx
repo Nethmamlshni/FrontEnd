@@ -1,25 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ClientFeedbackPage from "./appoveFeedback";
 import Header from "../../../Components/Header_Part/header";
 
 const ClientFeedbackPages = () => {
     const [feedback, setFeedback] = useState("");
-    const [name, setName] = useState("");
+    const [userData, setUserData] = useState(null);
+      const [userFound, setUserFound] = useState(false);
+      const [loading, setLoading] = useState(true);
+      
+
+   const token = localStorage.getItem("token");
+   
+     useEffect(() => {
+       if (token) {
+         fetchUserData();
+       } else {
+         console.error("No token found. User not logged in.");
+         setLoading(false);
+       }
+     }, [token]);
+   
+    const fetchUserData = () => {
+        setLoading(true);
+        axios
+          .get(`${import.meta.env.VITE_API_URL}api/user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setUserData(res.data.user);
+            setUserFound(true);
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.error("Error fetching user data:", err.response?.data || err);
+            setUserFound(false);
+            setLoading(false);
+          });
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`${import.meta.env.VITE_API_URL}api/feedback`, { clientName: name, feedbackText: feedback })
+            .post(`${import.meta.env.VITE_API_URL}api/feedback`, { name: userData.name, feedbackText: feedback })
             .then(() => {
                 alert("Feedback submitted successfully!");
                 setFeedback("");
-                setName("");
             })
             .catch((err) => {
                 alert("Error submitting feedback.");
             });
     };
+    if (loading) {
+        return <p className="text-white">Loading...</p>;
+      }
+
+      if (!userFound) {
+        alert("User not found. Please log in again.");
+      }    
 
     return (
         <>
@@ -33,8 +73,8 @@ const ClientFeedbackPages = () => {
                 <input
                     type="text"
                     placeholder="Your Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={userData.name}
+                    onChange={(e) => setName()}
                     required
                     className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />

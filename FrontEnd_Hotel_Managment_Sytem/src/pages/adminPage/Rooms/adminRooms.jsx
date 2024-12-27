@@ -6,12 +6,13 @@ export default function AdminRooms() {
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({
     roomNumber: "",
-    type: "",
+    type: "single",
     price: "",
     isAvailable: "available",
     features: [],
     description: "",
     image: "",
+    category: "laxury",
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [modalVisible, setModalVisible] = useState(false); // Modal state
@@ -19,7 +20,6 @@ export default function AdminRooms() {
   useEffect(() => {
     fetchRooms();
   }, []);
-
   const fetchRooms = () => {
     setLoading(true);
     axios
@@ -37,6 +37,7 @@ export default function AdminRooms() {
   };
 
   const handleSubmit = (e) => {
+    console.log(form);
     e.preventDefault();
     const request = isEditMode
       ? axios.put(
@@ -62,12 +63,13 @@ export default function AdminRooms() {
   const resetForm = () => {
     setForm({
       roomNumber: "",
-      type: "",
+      type: "single",
       price: "",
       isAvailable: "available",
       features: [],
       description: "",
       image: "",
+      category: "laxury",
     });
     setIsEditMode(false);
     setModalVisible(false); // Hide modal
@@ -143,14 +145,16 @@ export default function AdminRooms() {
                 className="w-full p-2 border rounded"
                 disabled={isEditMode}
               />
-              <input
-                type="text"
-                placeholder="Type"
-                value={form.type}
-                onChange={(e) => setForm({ ...form, type: e.target.value })}
-                required
-                className="w-full p-2 border rounded"
-              />
+              <select 
+                 value={form.type} 
+                 onChange={(e) => setForm({ ...form, type: e.target.value })} 
+                 required 
+                 className="w-full p-2 border rounded"
+                 >
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="six">Suite</option>
+              </select>
               <input
                 type="number"
                 placeholder="Price"
@@ -167,6 +171,16 @@ export default function AdminRooms() {
               >
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
+              </select>
+              <select
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                required
+                className="w-full p-2 border rounded"
+              >
+                <option value="standard">Laxury</option>
+                <option value="luxury">Standard</option>
+                <option value="suite">Simple</option>
               </select>
               <input
                 type="text"
@@ -190,6 +204,7 @@ export default function AdminRooms() {
                 required
                 className="w-full p-2 border rounded"
               />
+             
               <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded">
                 {isEditMode ? "Update Room" : "Add Room"}
               </button>
@@ -205,6 +220,8 @@ export default function AdminRooms() {
             <h3 className="text-lg font-bold">Room {room.roomNumber}</h3>
             <p>{room.description}</p>
             <p>Price: ${room.price}</p>
+            <p>Category: {room.category}</p>
+            <p>Type: {room.type}</p>
             <p>Availability: {room.isAvailable}</p>
             <p>Features: {room.features.join(", ")}</p>
             <p>Image: <img src={room.image} alt={room.type} className="h-20 w-full object-cover mt-2" /></p>
