@@ -22,7 +22,7 @@ function LoginPage() {
         const token = localStorage.getItem("token");
 
         if (res.data.user.type !== "admin") {
-          console.log(res.data.user.type);
+          console.log(res.data.user);
             window.location.href = "/";
            // Redirect to admin page
         } else {
@@ -74,6 +74,7 @@ function LoginPage() {
           >
             Login
           </button>
+          
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ export default function AdminRooms() {
   const [form, setForm] = useState({
     roomNumber: "",
     type: "single",
-    price: "",
+    price: "1000",
     isAvailable: "available",
     features: [],
     description: "",
@@ -64,7 +64,7 @@ export default function AdminRooms() {
     setForm({
       roomNumber: "",
       type: "single",
-      price: "",
+      price: "1000",
       isAvailable: "available",
       features: [],
       description: "",
@@ -97,13 +97,37 @@ export default function AdminRooms() {
         });
     }
   };
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+
+    // Set price based on the selected category
+    let price = 0;
+    if (category === "laxury")
+      { if(form.type === "single") price = 1000;
+        else if (form.type === "double") price = 1500;
+        else if (form.type === "six") price = 2000;
+      }
+    else if (category === "standard") 
+    { if(form.type === "single") price = 700;
+      else if (form.type === "double") price = 1000;
+      else if (form.type === "six") price = 1500;
+    }
+    else if (category === "simple") 
+    { if(form.type === "single") price = 500;
+      else if (form.type === "double") price = 800;
+      else if (form.type === "six") price = 1200;
+    }
+
+    // Update the form state
+    setForm({ ...form, category, price });
+  };
 
   if (loading) {
     return <div>Loading rooms...</div>;
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="max-w-7xl mx-auto px-6 py-12 ">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Room Management</h1>
 
       {/* Add Room Button */}
@@ -153,7 +177,17 @@ export default function AdminRooms() {
                  >
                 <option value="single">Single</option>
                 <option value="double">Double</option>
-                <option value="six">Suite</option>
+                <option value="six">Six</option>
+              </select>
+              <select
+                value={form.category}
+                onChange={handleCategoryChange}
+                required
+                className="w-full p-2 border rounded"
+              >
+                <option value="laxury">Laxury</option>
+                <option value="standard">Standard</option>
+                <option value="simple">Simple</option>
               </select>
               <input
                 type="number"
@@ -172,16 +206,7 @@ export default function AdminRooms() {
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
               </select>
-              <select
-                value={form.category}
-                onChange={(e) => setForm({ ...form, category: e.target.value })}
-                required
-                className="w-full p-2 border rounded"
-              >
-                <option value="standard">Laxury</option>
-                <option value="luxury">Standard</option>
-                <option value="suite">Simple</option>
-              </select>
+             
               <input
                 type="text"
                 placeholder="Features (comma-separated)"

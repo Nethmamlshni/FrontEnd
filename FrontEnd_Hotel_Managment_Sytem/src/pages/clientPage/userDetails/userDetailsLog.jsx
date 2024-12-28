@@ -15,6 +15,8 @@ function UserData() {
 
   const token = localStorage.getItem("token");
 
+
+  // Fetch user data on mount
   useEffect(() => {
     if (token) {
       fetchUserData();
@@ -24,6 +26,7 @@ function UserData() {
     }
   }, [token]);
 
+  // Function to fetch user data
   const fetchUserData = () => {
     setLoading(true);
     axios
@@ -33,18 +36,27 @@ function UserData() {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setUserData(res.data.user);
         setEditForm(res.data.user); // Pre-fill form with user data
         setUserFound(true);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching user data:", err.response?.data || err);
+        if (err.response?.status === 401) {
+          alert("Session expired. Please log in again.");
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        } else {
+          console.error("Error fetching user data:", err.response?.data || err);
+          alert("Failed to fetch user data. Try again later.");
+        }
         setUserFound(false);
         setLoading(false);
       });
   };
 
+  // Function to handle editing user data
   const handleEdit = () => {
     axios
       .put(
@@ -67,6 +79,7 @@ function UserData() {
       });
   };
 
+  // Function to delete the user
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       axios
@@ -82,12 +95,13 @@ function UserData() {
           setUserFound(false);
         })
         .catch((err) => {
-          console.error("Error deleting user:", err);
+          console.error("Error deleting user:", err.response?.data || err);
           alert("An error occurred while deleting the user.");
         });
     }
   };
 
+  // Display loading message
   if (loading) {
     return <p className="text-white">Loading...</p>;
   }
@@ -95,7 +109,7 @@ function UserData() {
   return (
     <>
       <Header />
-      <div className="flex flex-col items-center min-h-screen bg-gray-50 py-12 px-6">
+      <div className="flex flex-col items-center min-h-screen py-12 px-6 bg-blue-300">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">User Details</h1>
         {userFound && userData ? (
           isEditMode ? (
@@ -160,37 +174,31 @@ function UserData() {
               </p>
               <button
                 onClick={() => setIsEditMode(true)}
-                className="bg-yellow-500 text-white px-4 py-2 ounded-lg shadow mr-2 hover:bg-yellow-600"
+                className="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow mr-2 hover:bg-yellow-600"
               >
                 Edit
               </button>
               <button
                 onClick={handleDelete}
-                className="bg-red-500 text-white px-4 py-2  rounded-lg shadow hover:bg-red-600"
+                className="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600"
               >
                 Delete
               </button>
-              {userFound && (
-          <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              setUserData(null);
-              setUserFound(false);
-            }}
-            className="m-2 text-white bg-red-500 px-4 py-2 rounded-lg shadow hover:bg-red-600 transition duration-300"
-          >
-            Logout
-          </button>
-        )}
+              <button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  setUserData(null);
+                  setUserFound(false);
+                }}
+                className="m-2 text-white bg-red-500 px-4 py-2 rounded-lg shadow hover:bg-red-600 transition duration-300"
+              >
+                Logout
+              </button>
             </div>
           )
         ) : (
-          <h1 className="text-lg font-semibold text-gray-800">
-            User not found
-          </h1>
+          <h1 className="text-lg font-semibold text-gray-800">User not found</h1>
         )}
-        
-        
       </div>
     </>
   );

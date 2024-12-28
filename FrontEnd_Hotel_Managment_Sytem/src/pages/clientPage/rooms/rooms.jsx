@@ -71,21 +71,27 @@ export default function Rooms() {
                 </div>
                 <div className="flex justify-between items-center">
                 <button
-                 className="bg-[#4A4947] hover:bg-[#4A4947] text-white py-2 px-4 rounded-md mt-4"
-                 onClick={() => {
-                 const roomNumber = room.roomNumber; // Replace with your dynamic room number
-                window.location.href = `http://localhost:5173/?roomNumber=${roomNumber}`;
-                 }}>
-                  Book Now
-                   </button>
-                  <span
-                    className={`px-3 py-1 text-sm rounded-full ${
-                      room.isAvailable
-                        ? "bg-green-500 text-white"
-                        : "bg-red-500 text-white"
-                    }`}
-                  >
-                    {room.isAvailable ? "Available" : "Unavailable"}
+    className={`bg-[#4A4947] hover:bg-[#4A4947] text-white py-2 px-4 rounded-md mt-4 ${
+      room.isAvailable === "available" ? "" : "cursor-not-allowed"
+    }`}
+    onClick={() => {
+      if (room.isAvailable==="available") {
+        const roomNumber = room.roomNumber; // Replace with your dynamic room number
+        window.location.href = `http://localhost:5173/?roomNumber=${roomNumber}`;
+      } else {
+        alert("This room is not available!");
+      }
+    }}
+    disabled={room.isAvailable==="available" ? false : true}
+  >
+    Book Now
+  </button>
+  <span
+    className={`px-3 py-1 text-sm rounded-full ${
+      room.isAvailable === "available" ? "bg-green-500 text-white" : "bg-red-500 text-white"
+    }`}
+  >
+    {room.isAvailable === "available" ? "Available" : "Unavailable"}
                   </span>
                 </div>
               </div>

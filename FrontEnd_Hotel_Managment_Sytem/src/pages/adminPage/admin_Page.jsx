@@ -14,17 +14,17 @@ function AdminPage() {
 
   return (
     <>
-      <div className="bg-white w-full h-[100vh] flex flex-col">
+      <div className="bg-green w-full h-[100vh] flex flex-col">
         {/* Top Navbar */}
         <div className="bg-gray-800 w-full h-16 flex items-center justify-between px-4 sm:px-8 shadow-md">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
             <img
-              src="Photoes/logo.png"
+              src="https://pngsource.in/assets/thumbnails/Sara-Hotel-Logo-Pngsource-FJDRWC3F.png"
               alt="Logo"
               className="h-10 w-10 rounded-full shadow-md"
             />
-            <h1 className="text-white text-lg font-semibold">Admin Dashboard</h1>
+            <h1 className="text-white text-lg font-semibold">Admin Panel</h1>
           </div>
 
           {/* Hamburger Menu for Mobile */}
@@ -59,7 +59,7 @@ function AdminPage() {
         <div className="flex-1 bg-[#FAF7F0] p-6 overflow-y-auto">
           <Routes>
             <Route
-              path="/Booking"
+              path="/booking"
               element={
                 <div className="p-6 bg-gray-50 rounded-lg shadow-md">
                   <AdminBooking />

@@ -31,11 +31,12 @@ function HomePage() {
   const [booking, setBooking] = useState({
     checkInDate: "",
     checkOutDate: "",
-    roomType: "luxury",
+    category: "luxury",
+    roomType: "Singal",
     roomNumber:"",
     notes: "",
   });
-
+  
   const handleChange = (e) => {
     setBooking({
       ...booking,
@@ -48,12 +49,23 @@ function HomePage() {
       alert("Please fill in all the required fields!");
       return;
     }
+    const today = new Date();
+    if (new Date(booking.checkInDate) < today) {
+      alert("Check-in date must be in the future!");
+      return;
+    }
+    if (new Date(booking.checkOutDate) < new Date(booking.checkInDate)) {
+      alert("Check-out date must be after check-in date!");
+      return;
+    }
+    
 
     const newBooking = {
       roomNumber: booking.roomNumber||roomNumbers,
       checkInDate: booking.checkInDate,
       checkOutDate: booking.checkOutDate,
-      totalPrice: booking.roomType === "luxury" ? 500 : booking.roomType === "deluxe" ? 300 : 100,
+      roomType: booking.roomType,
+      category: booking.category,
       status: "Pending",
       createdAt: new Date().toISOString(),
       notes: booking.notes || "N/A",
@@ -63,7 +75,7 @@ function HomePage() {
     bookings.push(newBooking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    setBooking({ checkInDate: "", checkOutDate: "", roomType: "luxury",roomNumber:"", notes: "" });
+    setBooking({ roomNumber:"",checkInDate: "", checkOutDate: "", roomType: "singal", category: "luxury", status: "Pending", createdAt: new Date().toISOString(), notes: "" });
     alert("Booking added successfully!");
   };
 
@@ -92,6 +104,7 @@ function HomePage() {
               value={booking.checkInDate}
               onChange={handleChange}
               className="px-4 py-2 rounded-lg border border-[#151514] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
+             
             />
             <input
               type="date"
@@ -99,10 +112,11 @@ function HomePage() {
               value={booking.checkOutDate}
               onChange={handleChange}
               className="px-4 py-2 rounded-lg border border-[#0f0f0e] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
+              
             />
             <select
-              name="roomType"
-              value={booking.roomType}
+              name="category"
+              value={booking.category}
               onChange={handleChange}
               className="px-4 py-2 rounded-lg border border-[#111110] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
             >
@@ -110,13 +124,23 @@ function HomePage() {
               <option value="deluxe">Deluxe</option>
               <option value="simple">Simple</option>
             </select>
+            <select
+              name="roomType"
+              value={booking.roomType}
+              onChange={handleChange}
+              className="px-4 py-2 rounded-lg border border-[#111110] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
+            >
+              <option value="singal">Singal</option>
+              <option value="double">Double</option>
+              <option value="six">Six</option>
+            </select>
             <input
               type="text"
               name="roomNumber"
               value={roomNumbers||booking.roomNumber}
               placeholder="Room Number"
               onChange={handleChange}
-              className="px-4 py-2 rounded-lg border border-[#151514] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
+              className="px-1 py-2 rounded-lg border border-[#151514] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
             />
             <input
               type="text"
