@@ -13,7 +13,6 @@ import Register from "./pages/Register/register";
 import ForgotPassword from "./pages/login/forgotPass";
 import ResetPassword from "./pages/login/reset";
 import CatagoryDetails from "./pages/clientPage/Catagories/catagoryDetails";
-
 function App() {
   return (
     <>
