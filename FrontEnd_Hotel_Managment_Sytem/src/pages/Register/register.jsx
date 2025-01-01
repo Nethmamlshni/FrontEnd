@@ -49,7 +49,6 @@ export default function Register() {
       setLoading(false);
     }
   };
-  
   return (
     <>
       <Header />
