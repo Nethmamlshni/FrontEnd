@@ -22,7 +22,7 @@ export default function AdminCategories() {
   const fetchCategories = () => {
     setLoading(true);
     axios
-      .get(import.meta.env.VITE_API_URL + "api/category", {
+      .get(import.meta.env.VITE_API_URL + "/api/category", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
