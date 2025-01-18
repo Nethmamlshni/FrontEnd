@@ -19,7 +19,7 @@ export default function Register() {
     setError(null);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/user`,
+        `${import.meta.env.VITE_API_URL}api/user`,
         {
           name: name,
           email: email,

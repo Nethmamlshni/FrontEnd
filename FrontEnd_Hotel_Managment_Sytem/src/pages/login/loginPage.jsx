@@ -11,7 +11,7 @@ function LoginPage() {
 
   const handleLogin = () => {
     axios
-      .post(import.meta.env.VITE_API_URL + "/api/user/login", {
+      .post(import.meta.env.VITE_API_URL + "api/user/login", {
         email: email,
         password: password,
       })

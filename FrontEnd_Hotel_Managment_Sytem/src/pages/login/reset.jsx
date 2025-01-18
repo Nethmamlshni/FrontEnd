@@ -23,7 +23,7 @@ function ResetPassword() {
 
     try {
       const response =  axios.post(
-        `${import.meta.env.VITE_API_URL}/api/user/resetpassword`,
+        `${import.meta.env.VITE_API_URL}api/user/resetpassword`,
         { token, password }
       );
       setMessage(response.data.message);
