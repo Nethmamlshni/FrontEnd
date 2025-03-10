@@ -33,7 +33,6 @@ function HomePage() {
     checkOutDate: "",
     category: "luxury",
     roomType: "Singal",
-    roomNumber:"",
     notes: "",
   });
   
@@ -61,7 +60,6 @@ function HomePage() {
     
 
     const newBooking = {
-      roomNumber: booking.roomNumber||roomNumbers,
       checkInDate: booking.checkInDate,
       checkOutDate: booking.checkOutDate,
       roomType: booking.roomType,
@@ -75,7 +73,7 @@ function HomePage() {
     bookings.push(newBooking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    setBooking({ roomNumber:"",checkInDate: "", checkOutDate: "", roomType: "singal", category: "luxury", status: "Pending", createdAt: new Date().toISOString(), notes: "" });
+    setBooking({ checkInDate: "", checkOutDate: "", roomType: "singal", category: "luxury", status: "Pending", createdAt: new Date().toISOString(), notes: "" });
     alert("Booking added successfully!");
   };
 
@@ -134,14 +132,6 @@ function HomePage() {
               <option value="double">Double</option>
               <option value="six">Six</option>
             </select>
-            <input
-              type="text"
-              name="roomNumber"
-              value={roomNumbers||booking.roomNumber}
-              placeholder="Room Number"
-              onChange={handleChange}
-              className="px-1 py-2 rounded-lg border border-[#151514] bg-[#F4F0E8] text-[#4A4947] focus:outline-none focus:ring-2 focus:ring-[#A35D3B]"
-            />
             <input
               type="text"
               name="notes"

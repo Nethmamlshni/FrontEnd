@@ -95,7 +95,6 @@ function AdminBooking() {
         <table className="table-auto w-full bg-white shadow-md rounded-lg">
           <thead className="bg-[#161046] text-white">
             <tr>
-              <th className="px-4 py-2 text-left">Room Number</th>
               <th className="px-4 py-2 text-left">Check-In Date</th>
               <th className="px-4 py-2 text-left">Check-Out Date</th>
               <th className="px-4 py-2 text-left">RoomType</th>
@@ -111,7 +110,6 @@ function AdminBooking() {
           <tbody>
             {bookings.map((booking, index) => (
               <tr key={index}>
-                <td className="px-4 py-2">{booking.roomNumber}</td>
                 <td className="px-4 py-2">
                   {new Date(booking.checkInDate).toLocaleDateString()}
                 </td>
