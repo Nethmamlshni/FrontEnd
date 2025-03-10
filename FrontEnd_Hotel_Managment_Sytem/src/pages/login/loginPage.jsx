@@ -65,6 +65,9 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             className="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full bg-white/80"
           />
+          <Link to ="/register" className="text-white hover:text-white-500">
+    Don't have an account? Sign up here 
+  </Link>
           <Link to="/forgot-password" className="text-white hover:text-white-500">
     Forgot your password?
   </Link>
