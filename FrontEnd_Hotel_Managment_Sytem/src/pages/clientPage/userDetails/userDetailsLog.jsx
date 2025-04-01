@@ -30,7 +30,7 @@ function UserData() {
   const fetchUserData = () => {
     setLoading(true);
     axios
-      .get(`${import.meta.env.VITE_API_URL}api/user`, {
+      .get(`${import.meta.env.VITE_API_URL}/api/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -60,7 +60,7 @@ function UserData() {
   const handleEdit = () => {
     axios
       .put(
-        `${import.meta.env.VITE_API_URL}api/user/${userData.id}`, // Assuming user ID is required
+        `${import.meta.env.VITE_API_URL}/api/user/${userData.id}`, // Assuming user ID is required
         editForm,
         {
           headers: {
@@ -83,7 +83,7 @@ function UserData() {
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       axios
-        .delete(`${import.meta.env.VITE_API_URL}api/user/${userData.id}`, {
+        .delete(`${import.meta.env.VITE_API_URL}/api/user/${userData.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

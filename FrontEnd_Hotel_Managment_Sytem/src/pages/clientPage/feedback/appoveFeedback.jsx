@@ -6,7 +6,7 @@ const ClientFeedbackPage = () => {
 
     useEffect(() => {
         axios
-        .get(`${import.meta.env.VITE_API_URL}api/feedback/approved`,
+        .get(`${import.meta.env.VITE_API_URL}/api/feedback/approved`,
  {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`, // Ensure token is retrieved

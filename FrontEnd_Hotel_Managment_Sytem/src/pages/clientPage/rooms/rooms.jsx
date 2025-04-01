@@ -9,7 +9,7 @@ export default function Rooms() {
   // Fetch rooms data from the backend
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_API_URL + "api/hotelRoom") // Endpoint for rooms
+      .get(import.meta.env.VITE_API_URL + "/api/hotelRoom") // Endpoint for rooms
       .then((res) => {
         setRooms(res.data || []); // Safeguard for undefined
         setLoading(false); // Stop loading

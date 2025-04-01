@@ -9,7 +9,7 @@ export default function Categories() {
   useEffect(() => {
     
     axios
-      .get(import.meta.env.VITE_API_URL + "api/category")
+      .get(import.meta.env.VITE_API_URL + "/api/category")
       .then((res) => {
         setCategories(res.data || []); // Safeguard for undefined
         setLoading(false); // Stop loading

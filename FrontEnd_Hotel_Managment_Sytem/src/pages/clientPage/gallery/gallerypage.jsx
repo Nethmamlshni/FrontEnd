@@ -9,7 +9,7 @@ export default function GalleryPage() {
   // Fetch gallery items from API
   useEffect(() => {
     axios
-      .get(import.meta.env.VITE_API_URL + "api/gallery")
+      .get(import.meta.env.VITE_API_URL + "/api/gallery")
       .then((res) => {
         setGalleryItems(res.data || []); // Safeguard for undefined
         setLoading(false); // Stop loading

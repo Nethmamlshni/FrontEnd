@@ -24,7 +24,7 @@ const ClientFeedbackPages = () => {
     const fetchUserData = () => {
         setLoading(true);
         axios
-          .get(`${import.meta.env.VITE_API_URL}api/user`, {
+          .get(`${import.meta.env.VITE_API_URL}/api/user`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -44,7 +44,7 @@ const ClientFeedbackPages = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`${import.meta.env.VITE_API_URL}api/feedback`, { name: userData.name, feedbackText: feedback })
+            .post(`${import.meta.env.VITE_API_URL}/api/feedback`, { name: userData.name, feedbackText: feedback })
             .then(() => {
                 alert("Feedback submitted successfully!");
                 setFeedback("");

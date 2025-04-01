@@ -11,7 +11,7 @@ export default function CategoryDetails() {
   useEffect(() => {
     const fetchCategoryDetails = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}api/category/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/category/${id}`);
         console.log(response); 
         if (!response.ok) {
           throw new Error('Failed to fetch category details');
